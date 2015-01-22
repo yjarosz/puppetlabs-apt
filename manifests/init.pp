@@ -64,7 +64,8 @@ class apt(
   $update_timeout       = undef,
   $update_tries         = undef,
   $sources              = undef,
-  $fancy_progress       = undef
+  $fancy_progress       = undef,
+  $mirror_url           = undef
 ) {
 
   if $::osfamily != 'Debian' {
@@ -73,7 +74,11 @@ class apt(
 
   $frequency_options = ['always','daily','weekly','reluctantly']
   validate_re($apt_update_frequency, $frequency_options)
-  include apt::params
+
+  class {'apt::params' :
+      $mirror => $mirror_url
+  }
+
   include apt::update
 
   validate_bool($purge_sources_list, $purge_sources_list_d,
