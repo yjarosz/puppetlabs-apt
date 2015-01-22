@@ -33,7 +33,7 @@ class apt::params ($mirror = undef){
     }
   }
   # choose a mirror
-  class { 'apt::mirrors':
+  class { '::apt::mirrors':
     mirror => $mirror,
   }
   $mirror = $apt::mirrors::mirror
