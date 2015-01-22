@@ -76,7 +76,7 @@ class apt(
   validate_re($apt_update_frequency, $frequency_options)
 
   class {'apt::params' :
-      $mirror => $mirror_url
+      mirror => $mirror_url
   }
 
   include apt::update
