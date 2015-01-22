@@ -1,4 +1,4 @@
-class apt::params ($mirror = undef){
+class apt::params ($mirror_url = undef){
   $root           = '/etc/apt'
   $provider       = '/usr/bin/apt-get'
   $sources_list_d = "${root}/sources.list.d"
@@ -34,11 +34,11 @@ class apt::params ($mirror = undef){
   }
   # choose a mirror
   class { '::apt::mirrors':
-    mirror        => $mirror,
+    mirror        => $mirror_url,
     distid        => $distid,
     distcodename  => $distcodename
   }
-  $mirror = $apt::mirrors::mirror
+  $mirror = $apt::mirrors::chosen_one
 
   case $distid {
     'debian': {
