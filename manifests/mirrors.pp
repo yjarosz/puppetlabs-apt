@@ -1,5 +1,4 @@
 class apt::mirrors ($distid, $distcodename, $mirror = undef){
-  $mirror = $mirror
   if $mirror == undef {
     case $distid {
       'debian': {
